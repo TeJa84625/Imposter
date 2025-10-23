@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Setup - Who is the Imposter?</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-image: linear-gradient(to bottom right, #111827, #1f2937);
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+
+        .modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-overlay>div {
+            transform: scale(0.9);
+            transition: transform 0.3s;
+        }
+
+        .modal-overlay.show>div {
+            transform: scale(1);
+        }
+    </style>
+</head>
+
+<body class="text-white min-h-screen flex items-center justify-center p-4">
+
+    <div class="w-full max-w-md mx-auto">
+
+        <div id="setup-screen" class="space-y-6">
+            <h1 class="text-3xl font-bold text-center text-cyan-400">Game Setup</h1>
+
+            <div class="bg-gray-800/70 backdrop-blur-sm border border-gray-700 p-6 rounded-lg shadow-xl space-y-4">
+                <h2 class="text-2xl font-semibold">1. Add Players</h2>
+                <div class="flex space-x-2">
+                    <input type="text" id="player-name-input" placeholder="Enter player name"
+                        class="flex-grow bg-gray-700 border border-gray-600 rounded-lg px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500 min-w-0">
+                    <button id="add-player-btn"
+                        class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold py-2 px-4 rounded-lg shadow transition-all duration-300 transform active:scale-95 shadow-lg">
+                        Add
+                    </button>
+                </div>
+                <ul id="player-list" class="space-y-2">
+                </ul>
+            </div>
+
+            <div class="bg-gray-800/70 backdrop-blur-sm border border-gray-700 p-6 rounded-lg shadow-xl space-y-4">
+                <h2 class="text-2xl font-semibold">2. Game Rules</h2>
+                <div class="flex items-center justify-between">
+                    <label for="imposter-count" class="text-lg">Imposters:</label>
+                    <div class="flex items-center space-x-3">
+                        <button id="imposter-decrement"
+                            class="bg-gray-700 w-8 h-8 rounded-full text-lg font-bold flex items-center justify-center transition-all duration-300 transform active:scale-90">-</button>
+                        <span id="imposter-count-label" class="text-xl font-bold w-6 text-center">1</span>
+                        <button id="imposter-increment"
+                            class="bg-gray-700 w-8 h-8 rounded-full text-lg font-bold flex items-center justify-center transition-all duration-300 transform active:scale-90">+</button>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-lg mb-2">Categories:</h3>
+                    <div id="category-list" class="grid grid-cols-2 gap-2">
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-3">
+                    <input type="checkbox" id="show-hint-checkbox"
+                        class="h-5 w-5 bg-gray-700 border-gray-600 rounded text-blue-500 focus:ring-blue-500">
+                    <label for="show-hint-checkbox" class="text-lg">Show Hint?</label>
+                </div>
+            </div>
+
+            <button id="start-game-btn"
+                class="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-3 px-4 rounded-lg text-lg transition-all duration-300 transform active:scale-95 shadow-lg">
+                Start Game
+            </button>
+        </div>
+    </div>
+
+    <div id="modal" class="modal-overlay">
+        <div
+            class="bg-gray-800/90 backdrop-blur-sm border border-gray-700 text-white w-11/12 max-w-sm p-6 rounded-lg shadow-xl text-center space-y-4">
+            <h3 id="modal-title" class="text-2xl font-bold"></h3>
+            <p id="modal-body" class="text-lg"></p>
+            <button id="modal-close-btn"
+                class="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-all duration-300 transform active:scale-95 shadow-lg">
+                OK
+            </button>
+        </div>
+    </div>
+
+    <script src="setup.js"></script>
+    <script>
+        // Prevent right-click and dev tools
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('keydown', e => {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && ['I', 'J'].includes(e.key.toUpperCase()))) {
+                e.preventDefault();
+            }
+        });
+    </script>
+</body>
+
+</html>
