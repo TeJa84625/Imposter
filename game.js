@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
             playerRole.textContent = "You are the Imposter!";
             playerRole.className = "text-4xl font-bold text-red-500";
             playerWord.textContent = "";
-            playerHint.textContent = state.showHint ? `Hint: ${state.selectedHint}` : "No hint this round!";
+            playerHint.textContent = state.showHint ? `Hint: ${state.selectedHint}` : " "; //No hint this round!
         } else {
             playerRole.textContent = "You are a Crewmate";
             playerRole.className = "text-4xl font-bold text-green-400";
