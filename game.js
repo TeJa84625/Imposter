@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     let gameData = {};
+    let previousWord = null;
 
     let state = {
         // --- From localStorage ---
@@ -104,11 +105,20 @@ document.addEventListener('DOMContentLoaded', () => {
         // Select word
         const chosenCategoryName = state.selectedCategories[Math.floor(Math.random() * state.selectedCategories.length)];
         const words = Object.keys(gameData[chosenCategoryName]);
-        const word = words[Math.floor(Math.random() * words.length)];
+
+        // Randomly select a word but ensure it is not the same as the previous one
+        let word = words[Math.floor(Math.random() * words.length)];
+        while (word === previousWord) {
+            word = words[Math.floor(Math.random() * words.length)];
+        }
+
         const hint = gameData[chosenCategoryName][word];
 
         state.selectedWord = word;
         state.selectedHint = hint;
+
+        // Update previousWord for the next round
+        previousWord = word;
 
         // Assign roles
         let playersCopy = [...state.players];
@@ -362,9 +372,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     revealEndGameBtn.addEventListener('click', () => {
-        // Go back to main menu
-        window.location.href = 'index.html';
-    });
+    // Ask user for confirmation to close the tab
+    const confirmation = confirm("Are you sure you want to close this tab?");
+    
+    if (confirmation) {
+        // Try to close the current tab (only works if the tab was opened using window.open())
+        window.close();
+    }
+});
+
 
 
     // --- Initialization ---

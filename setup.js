@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
         showHint: false,
     };
 
-    // --- Element Selectors ---
     const playerNameInput = document.getElementById('player-name-input');
     const addPlayerBtn = document.getElementById('add-player-btn');
     const playerList = document.getElementById('player-list');
@@ -25,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalBody = document.getElementById('modal-body');
     const modalCloseBtn = document.getElementById('modal-close-btn');
 
-    // --- Modal Functions ---
     function showModal(title, body) {
         modalTitle.textContent = title;
         modalBody.textContent = body;
@@ -36,7 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.classList.remove('show');
     });
 
-    // --- Player List Functions ---
     function renderPlayerList() {
         playerList.innerHTML = '';
         state.players.forEach((name, index) => {
@@ -85,7 +82,6 @@ document.addEventListener('DOMContentLoaded', () => {
         renderPlayerList();
     });
 
-    // --- Game Settings Functions ---
     imposterDecrementBtn.addEventListener('click', () => {
         if (state.imposterCount > 1) {
             state.imposterCount--;
@@ -94,7 +90,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     imposterIncrementBtn.addEventListener('click', () => {
-        // Allow imposter count to be 1 less than players
         if (state.imposterCount < Math.max(1, state.players.length - 1)) {
             state.imposterCount++;
             imposterCountLabel.textContent = state.imposterCount;
@@ -120,9 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- Start Game ---
     startGameBtn.addEventListener('click', () => {
-        // 1. Validate
         if (state.players.length < 3) {
             showModal('Error', 'You need at least 3 players to start.');
             return;
@@ -137,7 +130,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // 2. Collect Settings
         state.selectedCategories = Array.from(checkedCategories).map(cb => cb.value);
         state.showHint = showHintCheckbox.checked;
 
@@ -148,25 +140,14 @@ document.addEventListener('DOMContentLoaded', () => {
             showHint: state.showHint
         };
 
-        // 3. Save to localStorage
         localStorage.setItem('gameSettings', JSON.stringify(gameSettings));
 
-        // 4. Request Fullscreen
-        let element = document.documentElement;
-        if (element.requestFullscreen) element.requestFullscreen();
-        else if (element.mozRequestFullScreen) element.mozRequestFullScreen();
-        else if (element.webkitRequestFullscreen) element.webkitRequestFullscreen();
-        else if (element.msRequestFullscreen) element.msRequestFullscreen();
-
-        // 5. Redirect to Game
-        window.location.href = 'game.html';
+        window.open('game.html', '_blank');
     });
 
-
-    // --- Load Game Data ---
     async function loadGameData() {
         try {
-            const response = await fetch('data.json'); // Assumes data.json is in the same directory
+            const response = await fetch('data.json');
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
