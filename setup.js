@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
             state.imposterCount++;
             imposterCountLabel.textContent = state.imposterCount;
         } else if (state.players.length < 2) {
-             showModal('Error', 'Add more players to add imposters.');
+            showModal('Error', 'Add more players to add imposters.');
         } else {
             showModal('Error', 'Cannot have that many imposters.');
         }
