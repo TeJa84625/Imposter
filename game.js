@@ -102,22 +102,27 @@ document.addEventListener('DOMContentLoaded', () => {
         state.discussionStarter = "";
         state.votedPlayersCount = 0;
 
-        // Select word
+        // Select category
         const chosenCategoryName = state.selectedCategories[Math.floor(Math.random() * state.selectedCategories.length)];
         const words = Object.keys(gameData[chosenCategoryName]);
 
-        // Randomly select a word but ensure it is not the same as the previous one
+        // Randomly select a word but ensure it’s not the same as the previous one
         let word = words[Math.floor(Math.random() * words.length)];
         while (word === previousWord) {
             word = words[Math.floor(Math.random() * words.length)];
         }
 
-        const hint = gameData[chosenCategoryName][word];
+        // Get hint array for the chosen word
+        const hints = gameData[chosenCategoryName][word];
 
+        // Pick a random hint from the array
+        const randomHint = hints[Math.floor(Math.random() * hints.length)];
+
+        // Save word and hint in state
         state.selectedWord = word;
-        state.selectedHint = hint;
+        state.selectedHint = randomHint;
 
-        // Update previousWord for the next round
+        // Update previous word for next round
         previousWord = word;
 
         // Assign roles
