@@ -87,15 +87,20 @@
         <a href="index.html" class="text-1xl font-bold text-center text-cyan-400">Home</a>
     </div>
     <h1 class="text-4xl font-bold text-center text-cyan-400 mb-6">About</h1>
-    <div class="bg-gray-800/70 backdrop-blur-sm border border-gray-700 p-6 rounded-lg shadow-xl space-y-4">
-        <h2 class="text-2xl font-semibold">Instructions</h2>
-        <ul class="list-disc list-inside space-y-2 text-gray-300">
-            <li>Gather your friends and add all players.</li>
-            <li>Choose your settings (number of imposters, categories).</li>
-            <li>Pass the device around. Each player learns their role (Crewmate or Imposter).</li>
-            <li>Crewmates get the secret word. Imposters get a hint.</li>
-            <li>Discuss, find, and vote out the imposter!</li>
-        </ul>
+    <div class="bg-gray-800/70 backdrop-blur-sm border border-gray-700 p-6 rounded-lg shadow-xl space-y-4 min-w-[320px] max-w-2xl mx-auto">
+        <p class="text-gray-300">
+            Hi, I'm <span class="text-cyan-400 font-medium">Teja G</span> — a passionate developer who loves creating fun,
+            interactive, and meaningful web experiences. I enjoy blending clean design with smooth functionality to make
+            projects that are both enjoyable and easy to use.
+        </p>
+        <p class="text-gray-300">
+            This project was built as a way to bring people together through simple, social gameplay. It’s made using
+            <span class="text-cyan-400 font-medium">HTML</span>, <span class="text-cyan-400 font-medium">Tailwind CSS</span>,
+            and <span class="text-cyan-400 font-medium">JavaScript</span>, focusing on responsive design and accessibility.
+        </p>
+        <p class="text-gray-300">
+            Feel free to explore, share feedback, or even contribute! Every idea helps improve the experience.
+        </p>
     </div>
 
     <div class="footer">
@@ -110,5 +115,13 @@
     </div>
 
 </body>
+<script>
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('keydown', e => {
+        if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && ['I', 'J'].includes(e.key.toUpperCase()))) {
+            e.preventDefault();
+        }
+    });
+</script>
 
 </html>

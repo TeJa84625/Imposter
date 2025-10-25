@@ -372,15 +372,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     revealEndGameBtn.addEventListener('click', () => {
-    // Ask user for confirmation to close the tab
-    const confirmation = confirm("Are you sure you want to close this tab?");
-    
-    if (confirmation) {
-        // Try to close the current tab (only works if the tab was opened using window.open())
         window.close();
-    }
-});
-
+        // Ask user for confirmation to close the tab
+        // const confirmation = confirm("Are you sure you want to close this tab?");
+    
+        // if (confirmation) {
+        //     // Try to close the current tab (only works if the tab was opened using window.open())
+        //     window.close();
+        // }
+    });
 
 
     // --- Initialization ---
